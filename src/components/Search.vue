@@ -21,11 +21,13 @@
     methods: {
       async searchUsers() {
         try {
+          this.$bus.$emit('updateListData', { isFirst: false,isLoading:true,errMessage:'', users:[] });
           const res = await axios.get(`https://api.github.com/search/users?q=${this.keyWord}`);
           console.log('请求成功', res.data.items);
-          this.$bus.$emit('getUsers', res.data.items);
+          this.$bus.$emit('updateListData', {isLoading:false,errMessage:'', users:res.data.items });
         } catch (err) {
           console.log('请求失败', err.message);
+          this.$bus.$emit('updateListData', {isLoading:false,errMessage:err.message, users:[] });
         }
       }
     }

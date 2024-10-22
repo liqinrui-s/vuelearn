@@ -1,7 +1,7 @@
 <template>
  
   <div class="container">
-    <search />
+    <Search />
     <List />
   </div>
 </template>
